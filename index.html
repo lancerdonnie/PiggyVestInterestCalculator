@@ -131,7 +131,7 @@
         cursor: pointer;
       }
       .output {
-        height: 30px;
+        /* height: 30px; */
         background-color: orange;
         text-align: center;
         line-height: 30px;
@@ -184,6 +184,9 @@
       .years {
         text-align: center;
         margin-bottom: 10px;
+      }
+      .years span {
+        display: inline;
       }
       .harm {
         display: none;
@@ -281,7 +284,7 @@
         <div class="calc">
           <div class="header">Interest Calculator</div>
           <div class="plan">
-            <span class="sname">Piggy Plan</span>
+            <span class="sname">Select a Piggy Plan</span>
             <div class="planbuttons">
               <div title="Up to 10% interest" class="planbutton piggybank">
                 Piggy Bank
@@ -316,9 +319,8 @@
             </select>
           </div>
           <div class="years">
-            <span class="sname fund"
-              >Years to Fund (<span class="rangeoutput">1</span>)</span
-            >
+            <span class="sname fund">Years to Fund</span>
+            (<span class="rangeoutput">1</span>)
             <div>
               <input type="range" min="1" max="50" value="0" id="range" />
             </div>
@@ -392,19 +394,27 @@
 
       const getDate = (month) => {
         let date = new Date();
-        const newDate = () => new Date(date.setMonth(date.getMonth() + month));
+        const newDate = (mth) => {
+          var d = date.getDate();
+          date.setMonth(date.getMonth() + +mth);
+          if (date.getDate() != d) {
+            date.setDate(0);
+          }
+          return date;
+        };
+
         switch (selectedPeriod) {
           case '1':
-            date = newDate(12 * range.value);
+            date = newDate(12 * +range.value);
             break;
           case '2':
-            date = newDate(6 * range.value);
+            date = newDate(6 * +range.value);
             break;
           case '3':
-            date = newDate(4 * range.value);
+            date = newDate(4 * +range.value);
             break;
           case '4':
-            date = newDate(1 * range.value);
+            date = newDate(1 * +range.value);
             break;
           default:
             break;
@@ -438,11 +448,12 @@
           return;
         }
         const date = getDate(selectedPeriod);
-        output.innerHTML = `You will save ₦
-          ${(
-            ((+amount.value * +selected + +amount.value) * range.value) /
-            selectedPeriod
-          ).toFixed(2)} by ${date} 👍`;
+        output.innerHTML = `You get ₦${
+          +amount.value * +selected
+        } interest and ₦${(
+          ((+amount.value * +selected + +amount.value) * range.value) /
+          selectedPeriod
+        ).toFixed(2)} in total by ${date} 👍`;
       };
     </script>
   </body>
