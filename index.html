@@ -27,9 +27,6 @@
         height: 75px;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         background: #fff;
-        /* position: fixed;
-        top: 0;
-        left: 0; */
         z-index: 2000;
         width: 100%;
         font-size: 14px;
@@ -86,7 +83,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
       }
       .planbuttons {
         justify-content: space-around;
@@ -94,8 +91,9 @@
         align-items: center;
         display: grid;
         grid-template-columns: auto auto auto;
-        row-gap: 10px;
+        row-gap: 5px;
         column-gap: 10px;
+        margin-bottom: 10px;
       }
       .planbutton {
         border-radius: 10px;
@@ -104,6 +102,8 @@
         font-size: 0.8rem;
         cursor: pointer;
         margin-right: 2px;
+        text-align: center;
+        min-width: 77px;
       }
       .planbutton:hover {
         border-color: var(--hover);
@@ -114,8 +114,9 @@
         color: var(--hover);
       }
       .sname {
-        display: inline-block;
-        margin-bottom: 10px;
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
       }
       input[type='range'] {
         cursor: pointer;
@@ -123,8 +124,8 @@
       .calculate {
         border-radius: 20px;
         background-color: var(--hover);
-        padding: 10px 20px;
-        max-width: 150px;
+        padding: 10px 40px;
+        width: 254px;
         margin: 0 auto;
         text-align: center;
         cursor: pointer;
@@ -135,37 +136,59 @@
         text-align: center;
         line-height: 30px;
         padding: 0 20px;
+        margin-top: 10px;
+        width: 254px;
       }
       .output:empty {
         padding: 0;
+        width: 0;
+      }
+      #range {
+        padding: 0;
       }
       .header {
-        font-size: 1.1rem;
+        font-size: 1.4rem;
         font-weight: bold;
+        margin-bottom: 10px;
+        color: orange;
       }
       .amountval,
       select {
+        border-radius: 5px;
+      }
+      .amountval,
+      select,
+      .years input {
         border: none;
         outline: none;
-        padding: 2px;
-        min-width: 150px;
+        padding: 6px 6px;
+        width: 254px;
       }
       .amountval:focus {
         border: 1px solid orange;
       }
-      select {
+      .plan {
+        margin-bottom: 10px;
       }
       .plan .sname {
         display: block;
         text-align: center;
+        margin-bottom: 10px;
+      }
+      .amount {
+        margin-bottom: 10px;
+      }
+      .period {
+        margin-bottom: 10px;
       }
       .years {
         text-align: center;
+        margin-bottom: 10px;
       }
       .harm {
         display: none;
       }
-      @media only screen and (max-width: 814px) {
+      @media only screen and (max-width: 873px) {
         ul {
           display: none !important;
         }
@@ -176,10 +199,6 @@
           margin-right: 30px;
           cursor: pointer;
         }
-      }
-      @media only screen and (max-width: 767px) {
-      }
-      @media only screen and (max-width: 600px) {
         .card {
           flex-direction: column;
           padding: 0;
@@ -191,7 +210,11 @@
         }
         .calc {
           width: 100%;
+          margin-top: -25px;
+          padding-top: 40px;
         }
+      }
+      @media only screen and (max-width: 600px) {
         .years,
         .planbuttons {
           margin-bottom: 10px;
@@ -260,12 +283,22 @@
           <div class="plan">
             <span class="sname">Piggy Plan</span>
             <div class="planbuttons">
-              <div class="planbutton piggybank">Piggy Bank</div>
-              <div class="planbutton safelock">SafeLock</div>
-              <div class="planbutton target">Target</div>
-              <div class="planbutton flex">Flex</div>
-              <div class="planbutton dollar">Flex Dollar</div>
-              <div class="planbutton investify">Investify</div>
+              <div title="Up to 10% interest" class="planbutton piggybank">
+                Piggy Bank
+              </div>
+              <div title="Up to 15.5% interest" class="planbutton safelock">
+                SafeLock
+              </div>
+              <div title="Up to 10% interest" class="planbutton target">
+                Target
+              </div>
+              <div title="Up to 10% interest" class="planbutton flex">Flex</div>
+              <div title="Up to 6% interest" class="planbutton dollar">
+                Flex Dollar
+              </div>
+              <div title="Up to 25% interest" class="planbutton investify">
+                Investify
+              </div>
             </div>
             <!-- add comments on selected -->
           </div>
@@ -283,10 +316,11 @@
             </select>
           </div>
           <div class="years">
-            <span class="sname fund">Years to Fund</span>
+            <span class="sname fund"
+              >Years to Fund (<span class="rangeoutput">1</span>)</span
+            >
             <div>
               <input type="range" min="1" max="50" value="0" id="range" />
-              <span class="rangeoutput">1</span>
             </div>
           </div>
           <div class="calculate">Calculate</div>
