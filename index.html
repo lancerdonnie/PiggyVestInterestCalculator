@@ -70,7 +70,8 @@
         padding: 40px;
       }
       .image {
-        background: url('./5240.jpg') no-repeat center center;
+        background: url('https://res.cloudinary.com/dtyrfo0fx/image/upload/f_auto/v1592407981/hng%20granite/5240.jpg')
+          no-repeat center center;
         background-size: cover;
         background-color: var(--color);
         width: 66%;
@@ -282,7 +283,7 @@
             </select>
           </div>
           <div class="years">
-            <span class="sname">Years to Fund</span>
+            <span class="sname fund">Years to Fund</span>
             <div>
               <input type="range" min="1" max="50" value="0" id="range" />
               <span class="rangeoutput">1</span>
@@ -301,6 +302,7 @@
       const period = document.querySelector('#period');
       const calculate = document.querySelector('.calculate');
       const amount = document.querySelector('.amountval');
+      const fund = document.querySelector('.fund');
       let selected;
       let selectedPeriod = '1';
       range.oninput = function () {
@@ -335,6 +337,23 @@
 
       period.onchange = function (e) {
         selectedPeriod = e.target.value;
+        console.log(e.target.value);
+        switch (e.target.value) {
+          case '1':
+            fund.innerHTML = 'Years to Fund';
+            break;
+          case '2':
+            fund.innerHTML = 'Bi-annual times to Fund';
+            break;
+          case '3':
+            fund.innerHTML = 'Quaters to Fund';
+            break;
+          case '4':
+            fund.innerHTML = 'Months to Fund';
+            break;
+          default:
+            break;
+        }
       };
 
       const getDate = (month) => {
@@ -377,11 +396,11 @@
       };
       calculate.onclick = function (e) {
         if (amount.value === '' || amount.value === null) {
-          output.innerHTML = '';
+          output.innerHTML = 'Please complete the form';
           return;
         }
         if (!selected) {
-          output.innerHTML = '';
+          output.innerHTML = 'Please complete the form';
           return;
         }
         const date = getDate(selectedPeriod);
